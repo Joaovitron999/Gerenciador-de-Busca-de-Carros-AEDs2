@@ -11,10 +11,26 @@
 
 using namespace std;
 
+//estrutura de dados dos carros
+struct Carro{  
+  char modelo[30];  
+  char marca[30];  
+  char tipo;
+  int ano;
+  float km;
+  float potencia;
+  char combustivel[30];
+  char cambio[30];
+  char direcao[30];
+  char cor[30];
+  int portas;
+  char placa[10];
+};
+
 //funçoes
 int menu(){
   int resposta;
-  cout << "------------------------------"<<endl;
+  system("clear||cls"); //Limpar a tela (Funciona tanto   em linux ou windows)
   cout << "Opção 1 -------------------- 1"<<endl;
   cout << "Opção 2 -------------------- 2"<<endl;
   cout << "Opção 3 -------------------- 3"<<endl;
@@ -24,14 +40,27 @@ int menu(){
   cout << "Sair ----------------------- 0"<<endl;
 
   cout << "\nEscolha uma opção"<<endl;
+  
   cin >> resposta;
+  if(resposta<0||resposta>6){
+    return menu();
+  }
+  else
+  {
+    return resposta; 
+  }
 
-  return resposta;
 }
 
 int main(){
- 
-  cout<<"TESTEEE"<<endl;
-  int x = menu();
+  int resposta;
+  do
+  {
+    resposta = menu();
+
+  }
+  while(resposta!=0);
+
+  
   return 0;
 }
