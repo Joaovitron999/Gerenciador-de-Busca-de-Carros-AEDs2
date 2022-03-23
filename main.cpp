@@ -9,22 +9,25 @@
 #include <iostream>
 #include <fstream>
 
+using std::cout; using std::cerr;
+using std::endl; using std::string;
+
 using namespace std;
 
 //estrutura de dados dos carros
 struct Carro{  
-  char modelo[30];  
-  char marca[30];  
-  char tipo;
+  string modelo;  
+  string marca;  
+  string tipo;
   int ano;
   float km;
   float potencia;
-  char combustivel[30];
-  char cambio[30];
-  char direcao[30];
-  char cor[30];
+  string combustivel;
+  string cambio;
+  string direcao;
+  string cor;
   int portas;
-  char placa[10];
+  string placa;
 };
 
 //Estrutura dos nós da lista principal
@@ -32,8 +35,6 @@ class No{
   public:
     Carro carro;
     No* proxNo;
-    private:
-  	int v;
 };
 //Estrurura da lista principal
 
@@ -69,8 +70,60 @@ public:
 };
 //Ler Arquivos
 void ler(){
-  
-  
+    string word;
+    Carro c1; 
+     
+    ifstream arquivo("BD_veiculo.txt");
+    if (!arquivo.is_open()) {
+      cout << "ERRO ao abrir arquivo";
+    }
+
+    //Ignorar cabeçalho arquivo---
+    for(int i = 0;i<13;i++){
+      arquivo >> word;
+    }
+    word = "";                
+    //----------------------------
+
+    int x=0;
+    //Ler carros
+    while(!arquivo.eof()){
+    
+      arquivo >> c1.modelo;
+      arquivo >> c1.marca;
+      arquivo >> c1.tipo;
+      arquivo >> c1.ano;
+      arquivo >> c1.km;
+      arquivo >> c1.potencia;
+      arquivo >> c1.combustivel;
+      arquivo >> c1.cambio;
+      arquivo >> c1.direcao;
+      arquivo >> c1.cor;
+      arquivo >> c1.portas;
+      arquivo >> c1.placa;
+      //Testar Leitura
+    
+      cout << "\n\nCarro [" << x<<"]"<<endl;
+      cout << c1.modelo <<endl;
+      cout << c1.marca <<endl;
+      cout << c1.tipo <<endl;
+      cout << c1.ano <<endl;
+      cout << c1.km <<endl;
+      cout << c1.potencia <<endl;
+      cout << c1.combustivel <<endl;
+      cout << c1.cambio <<endl;
+      cout << c1.direcao <<endl;
+      cout << c1.cor <<endl;
+      cout << c1.portas <<endl;
+      cout << c1.placa <<endl;
+
+      cout <<"---------------------"<<endl;
+      x++;
+    }
+
+
+    arquivo.close();
+
 }
 
 //funçoes
@@ -104,7 +157,7 @@ int main(){
   ler();
   do
   {
-    resposta = menu();
+   // resposta = menu();
 
   }
   while(resposta!=0&&false);
