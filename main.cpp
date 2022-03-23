@@ -27,16 +27,46 @@ struct Carro{
   char placa[10];
 };
 
-//Criar Fila
+//Estrutura dos nós da lista principal
+class No{
+  public:
+    Carro carro;
+    No* proxNo;
+    private:
+  	int v;
+  	No* prox;
+  
+  	No(Carro c) // construtor
+  	{
+  		this->carro = c;
+  		this->proxNo = NULL;
+  	}
+};
+//Estrurura da lista principal
 
+ class Lista
+{
+public:
+	No* cabeca; // primeiro elemento
+	No* cauda; // último elemento
+
+  Lista()
+  {
+    // se não passar elemento, então cabeca e cauda são NULL
+    cabeca = NULL;
+    cauda = NULL;
+  }
+
+};
 //Ler Arquivos
 void ler(){
-
+  cout << "lendo";
   
 }
 
 //funçoes
 int menu(){
+  Lista mainLista;
   int resposta;
   system("clear||cls"); //Limpar a tela (Funciona tanto   em linux ou windows)
   cout << "Opção 1 -------------------- 1"<<endl;
@@ -69,7 +99,7 @@ int main(){
     resposta = menu();
 
   }
-  while(resposta!=0);
+  while(resposta!=0&&false);
 
   
   return 0;

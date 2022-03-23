@@ -1,2 +1,4 @@
 language = "c++"
 run="g++ main.cpp ; ./a.out"
+
+
