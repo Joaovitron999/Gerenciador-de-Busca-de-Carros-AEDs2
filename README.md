@@ -25,3 +25,4 @@ quando terminar a busca apresente os dados na tela;
 realizar a operação de inclusão de forma ordenada pela placa do veículo;
 apresentar o relatório de todos os clientes na tela do computador;
 ao final da execução todas as estruturas devem ser desalocadas.
+![estrutura2](https://user-images.githubusercontent.com/61283617/159601892-6a4ed160-7e6a-4ac5-b23e-2557d0dd15b1.png)
