@@ -5,22 +5,18 @@
 
 using namespace std;
 
-
-
-using namespace std;
-
 int fmenu(){
   int resposta;
-  sout << "------------------------------"<<endl;
-  sout << "Opção 1 -------------------- 1"<<endl;
-  sout << "Opção 2 -------------------- 2"<<endl;
-  sout << "Opção 3 -------------------- 3"<<endl;
-  sout << "Opção 4 -------------------- 4"<<endl;
-  sout << "Opção 5 -------------------- 5"<<endl;
-  sout << "Opção 6 -------------------- 6"<<endl;
-  sout << "Sair ----------------------- 0"<<endl;
+  cout << "------------------------------"<<endl;
+  cout << "Opção 1 -------------------- 1"<<endl;
+  cout << "Opção 2 -------------------- 2"<<endl;
+  cout << "Opção 3 -------------------- 3"<<endl;
+  cout << "Opção 4 -------------------- 4"<<endl;
+  cout << "Opção 5 -------------------- 5"<<endl;
+  cout << "Opção 6 -------------------- 6"<<endl;
+  cout << "Sair ----------------------- 0"<<endl;
 
-  sout << "/nEscolha uma opção"<<endl;
+  cout << "/nEscolha uma opção"<<endl;
   cin >> resposta;
 
   return resposta;
