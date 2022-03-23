@@ -30,6 +30,22 @@ struct Carro{
   string placa;
 };
 
+//funcao q exibe carro
+void exibeCarro(Carro c1){
+  cout << c1.modelo <<endl;
+  cout << c1.marca <<endl;
+  cout << c1.tipo <<endl;
+  cout << c1.ano <<endl;
+  cout << c1.km <<endl;
+  cout << c1.potencia <<endl;
+  cout << c1.combustivel <<endl;
+  cout << c1.cambio <<endl;
+  cout << c1.direcao <<endl;
+  cout << c1.cor <<endl;
+  cout << c1.portas <<endl;
+  cout << c1.placa <<endl;
+}
+
 //Estrutura dos nós da lista principal
 class No{
   public:
@@ -68,8 +84,20 @@ public:
 		}
 	}
 };
+//Exibir elementos de uma lista
+void exibeLista(Lista* lista){
+  No* no;
+  if(lista->cabeca!=NULL){
+    no = lista->cabeca;
+    system("clear||cls"); //Limpar a tela (Funciona tanto   em linux ou windows)
+    while(no!=NULL){
+      exibeCarro(no->carro);
+      no = no->proxNo;
+    }
+  }
+}
 //Ler Arquivos
-void ler(){
+void lerParaLista(Lista *lista){
     string word;
     Carro c1; 
      
@@ -85,7 +113,6 @@ void ler(){
     word = "";                
     //----------------------------
 
-    int x=0;
     //Ler carros
     while(!arquivo.eof()){
     
@@ -101,43 +128,27 @@ void ler(){
       arquivo >> c1.cor;
       arquivo >> c1.portas;
       arquivo >> c1.placa;
-      //Testar Leitura
-    
-      cout << "\n\nCarro [" << x<<"]"<<endl;
-      cout << c1.modelo <<endl;
-      cout << c1.marca <<endl;
-      cout << c1.tipo <<endl;
-      cout << c1.ano <<endl;
-      cout << c1.km <<endl;
-      cout << c1.potencia <<endl;
-      cout << c1.combustivel <<endl;
-      cout << c1.cambio <<endl;
-      cout << c1.direcao <<endl;
-      cout << c1.cor <<endl;
-      cout << c1.portas <<endl;
-      cout << c1.placa <<endl;
-
-      cout <<"---------------------"<<endl;
-      x++;
+      //Add na lista
+      lista->inserir(c1);
     }
-
-
     arquivo.close();
-
 }
 
 //funçoes
 int menu(){
-  Lista mainLista;
   int resposta;
-  system("clear||cls"); //Limpar a tela (Funciona tanto   em linux ou windows)
-  cout << "Opção 1 -------------------- 1"<<endl;
-  cout << "Opção 2 -------------------- 2"<<endl;
-  cout << "Opção 3 -------------------- 3"<<endl;
-  cout << "Opção 4 -------------------- 4"<<endl;
-  cout << "Opção 5 -------------------- 5"<<endl;
-  cout << "Opção 6 -------------------- 6"<<endl;
-  cout << "Sair ----------------------- 0"<<endl;
+  //system("clear||cls"); //Limpar a tela (Funciona tanto   em linux ou windows)
+  cout << "\n\n\n\t\t\t[Menu]______________________________"<<endl;
+  cout << "\t\t\t|                                  |"<<endl;
+  cout << "\t\t\t|  Exibir Lista de veículos --- 1  |"<<endl;
+  cout << "\t\t\t|  Opção 2 -------------------- 2  |"<<endl;
+  cout << "\t\t\t|  Opção 3 -------------------- 3  |"<<endl;
+  cout << "\t\t\t|  Opção 4 -------------------- 4  |"<<endl;
+  cout << "\t\t\t|  Opção 5 -------------------- 5  |"<<endl;
+  cout << "\t\t\t|  Opção 6 -------------------- 6  |"<<endl;
+  cout << "\t\t\t|  Sair ----------------------- 0  |"<<endl;
+  cout << "\t\t\t|__________________________________|\n\n"<<endl;
+
 
   cout << "\nEscolha uma opção"<<endl;
   
@@ -152,14 +163,28 @@ int menu(){
 
 }
 
+//Main
+
 int main(){
   int resposta;
-  ler();
-  do
-  {
-   // resposta = menu();
-
-  }
-  while(resposta!=0&&false);
+  Lista mainLista;
+  
+  lerParaLista(&mainLista);
+  
+  do{
+      resposta = menu(); //Loop comentado 
+      switch (resposta)
+      {
+       case 1:
+           exibeLista(&mainLista);
+       break;
+    
+       case 2:
+         //
+       break;
+      }
+  }while(resposta!=0);
+  
+  
   return 0;
 }
