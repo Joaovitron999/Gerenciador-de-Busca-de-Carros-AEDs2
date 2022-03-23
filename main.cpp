@@ -34,17 +34,10 @@ class No{
     No* proxNo;
     private:
   	int v;
-  	No* prox;
-  
-  	No(Carro c) // construtor
-  	{
-  		this->carro = c;
-  		this->proxNo = NULL;
-  	}
 };
 //Estrurura da lista principal
 
- class Lista
+class Lista
 {
 public:
 	No* cabeca; // primeiro elemento
@@ -57,10 +50,26 @@ public:
     cauda = NULL;
   }
 
+  void inserir(Carro c)
+	{
+		No* novo_no = new No();
+    novo_no->carro = c;
+
+		if(cabeca==NULL)
+		{
+			cabeca = novo_no;
+			cauda = novo_no;
+		}
+		else
+		{
+			novo_no->proxNo = cabeca;
+			cabeca = novo_no;
+		}
+	}
 };
 //Ler Arquivos
 void ler(){
-  cout << "lendo";
+  
   
 }
 
@@ -93,14 +102,11 @@ int menu(){
 int main(){
   int resposta;
   ler();
-  
   do
   {
     resposta = menu();
 
   }
   while(resposta!=0&&false);
-
-  
   return 0;
 }
