@@ -27,6 +27,14 @@ struct Carro{
   char placa[10];
 };
 
+//Criar Fila
+
+//Ler Arquivos
+void ler(){
+
+  
+}
+
 //funçoes
 int menu(){
   int resposta;
@@ -54,6 +62,8 @@ int menu(){
 
 int main(){
   int resposta;
+  ler();
+  
   do
   {
     resposta = menu();
