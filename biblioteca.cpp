@@ -5,7 +5,7 @@
 
 using namespace std;
 
-int fmenu(){
+int fmenu(){        ///NAO FUNCIONOU
   int resposta;
   cout << "------------------------------"<<endl;
   cout << "Opção 1 -------------------- 1"<<endl;
