@@ -26,3 +26,17 @@ realizar a operação de inclusão de forma ordenada pela placa do veículo;
 apresentar o relatório de todos os clientes na tela do computador;
 ao final da execução todas as estruturas devem ser desalocadas.
 ![estrutura2](https://user-images.githubusercontent.com/61283617/159601892-6a4ed160-7e6a-4ac5-b23e-2557d0dd15b1.png)
+
+
+    arquivo >> c1.modelo;
+    arquivo >> c1.marca;
+    arquivo >> c1.tipo;
+    arquivo >> c1.ano;
+    arquivo >> c1.km;
+    arquivo >> c1.potencia;
+    arquivo >> c1.combustivel;
+    arquivo >> c1.cambio;
+    arquivo >> c1.direcao;
+    arquivo >> c1.cor;
+    arquivo >> c1.portas;
+    arquivo >> c1.placa;

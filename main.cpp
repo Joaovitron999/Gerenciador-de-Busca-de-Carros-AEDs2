@@ -32,18 +32,19 @@ struct Carro{
 
 //funcao q exibe carro
 void exibeCarro(Carro c1){
-  cout << c1.modelo <<endl;
-  cout << c1.marca <<endl;
-  cout << c1.tipo <<endl;
-  cout << c1.ano <<endl;
-  cout << c1.km <<endl;
-  cout << c1.potencia <<endl;
-  cout << c1.combustivel <<endl;
-  cout << c1.cambio <<endl;
-  cout << c1.direcao <<endl;
-  cout << c1.cor <<endl;
-  cout << c1.portas <<endl;
-  cout << c1.placa <<endl;
+  cout <<"\tmodelo: "<< c1.modelo <<" , ";
+  cout <<"marca: " << c1.marca <<" , ";
+  cout <<"" << c1.tipo <<" , ";
+  cout <<"" << c1.ano <<" , "<<endl;
+  cout <<"\t" << c1.km <<" , ";
+  cout <<"" << c1.potencia <<" , ";
+  cout <<"" << c1.combustivel <<" , ";
+  cout <<"" << c1.cambio <<" , "<<endl;
+  cout <<"\t" << c1.direcao <<" , ";
+  cout <<"" << c1.cor <<" , ";
+  cout <<"" << c1.portas <<" , ";
+  cout <<"" << c1.placa <<" , ";
+  cout <<"\n\t---------------------\n";
 }
 
 //Estrutura dos nós da lista principal
@@ -82,6 +83,10 @@ public:
 			novo_no->proxNo = cabeca;
 			cabeca = novo_no;
 		}
+	}
+  void remove(Carro c)
+	{
+		// implementar
 	}
 };
 //Exibir elementos de uma lista
@@ -137,17 +142,19 @@ void lerParaLista(Lista *lista){
 //funçoes
 int menu(){
   int resposta;
-  //system("clear||cls"); //Limpar a tela (Funciona tanto   em linux ou windows)
-  cout << "\n\n\n\t\t\t[Menu]______________________________"<<endl;
-  cout << "\t\t\t|                                  |"<<endl;
-  cout << "\t\t\t|  Exibir Lista de veículos --- 1  |"<<endl;
-  cout << "\t\t\t|  Opção 2 -------------------- 2  |"<<endl;
-  cout << "\t\t\t|  Opção 3 -------------------- 3  |"<<endl;
-  cout << "\t\t\t|  Opção 4 -------------------- 4  |"<<endl;
-  cout << "\t\t\t|  Opção 5 -------------------- 5  |"<<endl;
-  cout << "\t\t\t|  Opção 6 -------------------- 6  |"<<endl;
-  cout << "\t\t\t|  Sair ----------------------- 0  |"<<endl;
-  cout << "\t\t\t|__________________________________|\n\n"<<endl;
+  //system("clear||cls"); //Limpar a tela (Funciona tanto   em linux ou windows
+
+  //inclusão, exclusão, buscas e relatório;
+  cout << "\n\n\n\t\t\t______________[Menu]________________"<<endl;
+        cout << "\t\t\t|                                  |"<<endl;
+        cout << "\t\t\t|  Exibir Lista de veículos --- 1  |"<<endl;
+        cout << "\t\t\t|  Incluir veículo ------------ 2  |"<<endl;
+        cout << "\t\t\t|  Opção 3 -------------------- 3  |"<<endl;
+        cout << "\t\t\t|  Opção 4 -------------------- 4  |"<<endl;
+        cout << "\t\t\t|  Opção 5 -------------------- 5  |"<<endl;
+        cout << "\t\t\t|  Opção 6 -------------------- 6  |"<<endl;
+        cout << "\t\t\t|  Sair ----------------------- 0  |"<<endl;
+        cout << "\t\t\t|__________________________________|\n\n"<<endl;
 
 
   cout << "\nEscolha uma opção"<<endl;
@@ -160,7 +167,52 @@ int menu(){
   {
     return resposta; 
   }
+}
 
+//Incluir veiculo
+void incluirVeiculo(Lista* lista){
+  Carro c1;
+  cout << "\n\t\t\tInforme os dados:"<<endl;
+
+  cout << "\n\t\t\tModelo:  ";
+  cin >> c1.modelo;
+
+  cout << "\n\t\t\tTipo:  ";
+  cin >> c1.tipo;
+
+  cout << "\n\t\t\tAno:  ";
+  cin >> c1.ano;
+
+  cout << "\n\t\t\tMarca:  ";
+  cin >> c1.marca;
+
+  
+  cout << "\n\t\t\tQuilometragem:  ";
+  cin >> c1.km;
+
+  cout << "\n\t\t\tPotencia:  ";
+  cin >> c1.potencia;
+  
+  cout << "\n\t\t\tCombustível:  ";
+  cin >> c1.combustivel;
+  cout << "\n\t\t\tCambio:  ";
+  cin >> c1.cambio;
+
+  cout << "\n\t\t\tDireção:  ";
+  cin >> c1.direcao;
+  cout << "\n\t\t\tCor:  ";
+  cin >> c1.cor;
+
+  cout << "\n\t\t\tPortas:  ";
+  cin >> c1.portas;
+  cout << "\n\t\t\tPlaca:  ";
+  cin >> c1.placa;
+
+  exibeCarro(c1);
+  lista->inserir(c1);
+  cout <<  "\n\t\t\tCARRO ADICIONADO!:  "<<endl;
+  
+  
 }
 
 //Main
@@ -180,11 +232,10 @@ int main(){
        break;
     
        case 2:
-         //
+          incluirVeiculo(&mainLista);
        break;
       }
   }while(resposta!=0);
-  
-  
+
   return 0;
 }
