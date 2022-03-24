@@ -16,7 +16,7 @@ int fmenu(){        ///NAO FUNCIONOU
   cout << "Opção 6 -------------------- 6"<<endl;
   cout << "Sair ----------------------- 0"<<endl;
 
-  cout << "/nEscolha uma opção"<<endl;
+  cout << "\nEscolha uma opção\n"<<endl;
   cin >> resposta;
 
   return resposta;

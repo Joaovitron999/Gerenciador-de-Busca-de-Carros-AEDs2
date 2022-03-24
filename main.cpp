@@ -138,16 +138,16 @@ void lerParaLista(Lista *lista){
 int menu(){
   int resposta;
   //system("clear||cls"); //Limpar a tela (Funciona tanto   em linux ou windows)
-  cout << "\n\n\n\t\t\t[Menu]______________________________"<<endl;
-  cout << "\t\t\t|                                  |"<<endl;
-  cout << "\t\t\t|  Exibir Lista de veículos --- 1  |"<<endl;
-  cout << "\t\t\t|  Opção 2 -------------------- 2  |"<<endl;
-  cout << "\t\t\t|  Opção 3 -------------------- 3  |"<<endl;
-  cout << "\t\t\t|  Opção 4 -------------------- 4  |"<<endl;
-  cout << "\t\t\t|  Opção 5 -------------------- 5  |"<<endl;
-  cout << "\t\t\t|  Opção 6 -------------------- 6  |"<<endl;
-  cout << "\t\t\t|  Sair ----------------------- 0  |"<<endl;
-  cout << "\t\t\t|__________________________________|\n\n"<<endl;
+  cout << "\n\n\n\t\t\t______________[Menu]________________"<<endl;
+        cout << "\t\t\t|                                  |"<<endl;
+        cout << "\t\t\t|  Exibir Lista de veículos --- 1  |"<<endl;
+        cout << "\t\t\t|  Opção 2 -------------------- 2  |"<<endl;
+        cout << "\t\t\t|  Opção 3 -------------------- 3  |"<<endl;
+        cout << "\t\t\t|  Opção 4 -------------------- 4  |"<<endl;
+        cout << "\t\t\t|  Opção 5 -------------------- 5  |"<<endl;
+        cout << "\t\t\t|  Opção 6 -------------------- 6  |"<<endl;
+        cout << "\t\t\t|  Sair ----------------------- 0  |"<<endl;
+        cout << "\t\t\t|__________________________________|\n\n"<<endl;
 
 
   cout << "\nEscolha uma opção"<<endl;
@@ -184,7 +184,6 @@ int main(){
        break;
       }
   }while(resposta!=0);
-  
-  
+
   return 0;
 }
