@@ -232,7 +232,7 @@ int menu(){
 //Incluir veiculo
 void incluirVeiculo(Lista* lista){
   Carro c1;
-  cout << "\n\t\t\tInforme os dados:"<<endl;
+  cout << "\n\t\t\tInforme os dados: (sem espaços)"<<endl;
 
   cout << "\n\t\t\tModelo: ";
   cin >> c1.modelo;
@@ -268,9 +268,12 @@ void incluirVeiculo(Lista* lista){
   cout << "\n\t\t\tPlaca: ";
   cin >> c1.placa;
 
+  system("clear||cls"); //Limpar a tela (Funciona tanto em linux ou windows
+
+  cout <<  "\n\t\t\tCARRO ADICIONADO! "<<endl;
   exibeCarro(c1);
   lista->inserir(c1);
-  cout <<  "\n\t\t\tCARRO ADICIONADO! "<<endl;
+  
 }
 
 //Main
@@ -302,7 +305,7 @@ int main(){
         
         case 3:
           system("clear||cls"); //Limpar a tela (Funciona tanto em linux ou windows
-          cout << "\n\t\t\t Escreva o conjunto que deseja excluir:\n \n\tPor exemplo - Digite 'RENAULT' para excluir todos da mesma Marca. \n (Tipo/Ano/Modelo/Combustível/Câmbio/Direção/Cor/Portas/Km/Marca/Potência) ";
+          cout << "\n\t\t\t Escreva o conjunto que deseja excluir\n \n\tPor exemplo - Digite 'RENAULT' para excluir todos da mesma Marca. \n (Tipo/Ano/Modelo/Combustível/Câmbio/Direção/Cor/Portas/Km/Marca/Potência)\n \nConjunto:";
           
             
             cin >> aux;
