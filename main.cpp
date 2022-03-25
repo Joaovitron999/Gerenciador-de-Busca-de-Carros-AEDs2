@@ -19,14 +19,14 @@ struct Carro{
   string modelo;  
   string marca;  
   string tipo;
-  int ano;
-  float km;
-  float potencia;
+  string ano;
+  string km;
+  string potencia;
   string combustivel;
   string cambio;
   string direcao;
   string cor;
-  int portas;
+  string portas;
   string placa;
 
   bool comparacaoTotal(Carro* c){
@@ -105,20 +105,50 @@ public:
 	}
 };
 
-void remove(Carro c, Lista* l)
+void removeEspecifico(Carro c, Lista* lista)
 	{
-		No* no = l->cabeca;
-    No* proxNo = l->cabeca->proxNo;
-    while(no!=NULL)
-    {
-      
-
-
-      no = proxNo;
-      proxNo = no;
-      // passar próximo
+    No* no;
+    No* anterior;
+    
+    if(lista->cabeca!=NULL){
+    no = lista->cabeca;
+    
+    while(no!=NULL){
+        if(no->carro.comparacaoTotal(&c)){
+          if (no==lista->cabeca){
+            lista->cabeca = no->proxNo;
+          }else{
+            anterior->proxNo = no->proxNo;
+          }
+        }
+        anterior = no;
+        no = no->proxNo;
+      }
     }
-	}
+  }
+
+void removeColetivo(Carro c, Lista* lista)
+	{
+    No* no;
+    No* anterior;
+    
+    if(lista->cabeca!=NULL){
+    no = lista->cabeca;
+    
+    while(no!=NULL){
+        if(no->carro.comparacaoParcial(&c)){
+          if (no==lista->cabeca){
+            lista->cabeca = no->proxNo;
+          }else{
+            anterior->proxNo = no->proxNo;
+          }
+        }
+        anterior = no;
+        no = no->proxNo;
+      }
+    }
+  }
+
 //Exibir elementos de uma lista
 void exibeLista(Lista* lista){
   No* no;
@@ -175,16 +205,16 @@ int menu(){
   //system("clear||cls"); //Limpar a tela (Funciona tanto em linux ou windows
 
   //inclusão, exclusão, buscas e relatório;
-  cout << "\n\n\n\t\t\t_______________[Menu]_______________"<<endl;
-        cout << "\t\t\t|                                  |"<<endl;
-        cout << "\t\t\t|  Exibir Lista de veículos --- 1  |"<<endl;
-        cout << "\t\t\t|  Incluir veículo ------------ 2  |"<<endl;
-        cout << "\t\t\t|  Remover veículo por TIPO --- 3  |"<<endl;
-        cout << "\t\t\t|  Remover veículo ESPECÍFICO - 4  |"<<endl;
-        cout << "\t\t\t|  Opção 5 -------------------- 5  |"<<endl;
-        cout << "\t\t\t|  Opção 6 -------------------- 6  |"<<endl;
-        cout << "\t\t\t|  Sair ----------------------- 0  |"<<endl;
-        cout << "\t\t\t|__________________________________|\n\n"<<endl;
+  cout << "\n\n\n\t\t\t _______________[Menu]______________ "<<endl;
+        cout << "\t\t\t|                                   |"<<endl;
+        cout << "\t\t\t|  Exibir Lista de veículos ---- 1  |"<<endl;
+        cout << "\t\t\t|  Incluir veículo ------------- 2  |"<<endl;
+        cout << "\t\t\t|  Remover veículo COLETIVAMENTE 3  |"<<endl;
+        cout << "\t\t\t|  Remover veículo ESPECÍFICO -- 4  |"<<endl;
+        cout << "\t\t\t|  Opção 5 --------------------- 5  |"<<endl;
+        cout << "\t\t\t|  Mostrar Relatório ----------- 6  |"<<endl;
+        cout << "\t\t\t|  Sair ------------------------ 0  |"<<endl;
+        cout << "\t\t\t|___________________________________|\n\n"<<endl;
 
 
   cout << "\nEscolha uma opção"<<endl;
@@ -248,20 +278,68 @@ void incluirVeiculo(Lista* lista){
 int main(){
   int resposta;
   Lista mainLista;
+
+  string relatorio = "\n\tRelatório:  ";
   
   lerParaLista(&mainLista);
-  
+  string aux;
+  Carro carroR;
   do{
       resposta = menu(); //Loop comentado 
       switch (resposta)
       {
        case 1:
-           exibeLista(&mainLista);
+          system("clear||cls"); //Limpar a tela (Funciona tanto em linux ou windows
+          exibeLista(&mainLista);
+          relatorio=(relatorio+"Lista exibida | ");
        break;
     
        case 2:
+          system("clear||cls"); //Limpar a tela (Funciona tanto em linux ou windows
           incluirVeiculo(&mainLista);
+          relatorio=(relatorio+"Carro incluído | ");
        break;
+        
+        case 3:
+          system("clear||cls"); //Limpar a tela (Funciona tanto em linux ou windows
+          cout << "\n\t\t\t Escreva o conjunto que deseja excluir:\n \n\tPor exemplo - Digite 'RENAULT' para excluir todos da mesma Marca. \n (Tipo/Ano/Modelo/Combustível/Câmbio/Direção/Cor/Portas/Km/Marca/Potência) ";
+          
+            
+            cin >> aux;
+            carroR.modelo = aux;
+            carroR.marca = aux;
+            carroR.tipo = aux;
+            carroR.ano = aux;
+            carroR.km = aux;
+            carroR.potencia = aux;
+            carroR.combustivel = aux;
+            carroR.cambio = aux;
+            carroR.direcao = aux;
+            carroR.cor = aux;
+            carroR.portas = aux;
+            //carroR.placa = aux;            
+            
+            removeColetivo(carroR,&mainLista);
+            relatorio=(relatorio+"Exclusão coletiva ("+aux+")  |");  
+        break;
+  
+        case 4:
+            system("clear||cls"); //Limpar a tela (Funciona tanto em linux ou windows
+            cout << "\n\t\t\tPlaca do veículo a ser excluido: ";
+            
+            cin >> carroR.placa;
+            removeEspecifico(carroR,&mainLista);
+            relatorio=(relatorio+"Exclusão de Carro ESPECÍFICO ("+carroR.placa+") | ");
+        break;
+
+        case 5:
+          
+        break;
+  
+        case 6:
+            cout << relatorio;
+        break;
+        
       }
   }while(resposta!=0);
 
