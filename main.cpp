@@ -28,6 +28,24 @@ struct Carro{
   string cor;
   int portas;
   string placa;
+
+  bool comparacaoTotal(Carro* c){
+    return  (c->placa == placa);
+  }
+  bool comparacaoParcial(Carro* c){
+    return  (c->modelo == modelo ||
+             c->marca == marca ||
+             c->tipo == tipo ||
+             c->ano == ano ||
+             c->km == km ||
+             c->potencia == potencia ||
+             c->combustivel == combustivel ||
+             c->cambio == cambio ||
+             c->direcao == direcao ||
+             c->cor == cor ||
+             c->portas == portas ||
+             c->placa == placa);
+  }
 };
 
 //funcao q exibe carro
@@ -85,35 +103,22 @@ public:
 			cabeca = novo_no;
 		}
 	}
-  void remove(Carro c)
-	{
-		No* aux = cabeca;
-        No* ant = cabeca;
-        while(aux!=NULL)
-        {
-            if(aux->carro.modelo == c.modelo)
-            {
-                if(aux==cabeca)
-                {
-                    cabeca = cabeca->proxNo;
-                    delete aux;
-                    aux = cabeca;
-                }
-                else
-                {
-                    ant->proxNo = aux->proxNo;
-                    delete aux;
-                    aux = ant->proxNo;
-                }
-            }
-            else
-            {
-                ant = aux;
-                aux = aux->proxNo;
-            }
-        }
-	}
 };
+
+void remove(Carro c, Lista* l)
+	{
+		No* no = l->cabeca;
+    No* proxNo = l->cabeca->proxNo;
+    while(no!=NULL)
+    {
+      
+
+
+      no = proxNo;
+      proxNo = no;
+      // passar próximo
+    }
+	}
 //Exibir elementos de uma lista
 void exibeLista(Lista* lista){
   No* no;
@@ -174,8 +179,8 @@ int menu(){
         cout << "\t\t\t|                                  |"<<endl;
         cout << "\t\t\t|  Exibir Lista de veículos --- 1  |"<<endl;
         cout << "\t\t\t|  Incluir veículo ------------ 2  |"<<endl;
-        cout << "\t\t\t|  Remover veículo------------- 3  |"<<endl;
-        cout << "\t\t\t|  Opção 4 -------------------- 4  |"<<endl;
+        cout << "\t\t\t|  Remover veículo por TIPO --- 3  |"<<endl;
+        cout << "\t\t\t|  Remover veículo ESPECÍFICO - 4  |"<<endl;
         cout << "\t\t\t|  Opção 5 -------------------- 5  |"<<endl;
         cout << "\t\t\t|  Opção 6 -------------------- 6  |"<<endl;
         cout << "\t\t\t|  Sair ----------------------- 0  |"<<endl;
@@ -236,8 +241,6 @@ void incluirVeiculo(Lista* lista){
   exibeCarro(c1);
   lista->inserir(c1);
   cout <<  "\n\t\t\tCARRO ADICIONADO! "<<endl;
-  
-  
 }
 
 //Main
