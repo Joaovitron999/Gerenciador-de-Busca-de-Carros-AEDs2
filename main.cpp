@@ -79,12 +79,14 @@ class Lista
 public:
 	No* cabeca; // primeiro elemento
 	No* cauda; // último elemento
+  int tamanho = 0;//apenas para registrar qntdd de nós na lista
 
   Lista()
   {
     // se não passar elemento, então cabeca e cauda são NULL
     cabeca = NULL;
     cauda = NULL;
+
   }
 
   void inserir(Carro c)
@@ -102,6 +104,21 @@ public:
 			novo_no->proxNo = cabeca;
 			cabeca = novo_no;
 		}
+    tamanho++;
+    
+    //Ordenar
+    No* no;
+    No* auxNo;
+    no = cabeca;
+    
+    while(no!=NULL && no->proxNo != NULL){
+      if(no->carro.placa > no->proxNo->carro.placa){
+        auxNo->carro = no->proxNo->carro;
+        no->proxNo->carro = no->carro;
+        no->carro = auxNo->carro;
+      }
+      no = no->proxNo;
+    }
 	}
 };
 
@@ -120,6 +137,7 @@ void removeEspecifico(Carro c, Lista* lista)
           }else{
             anterior->proxNo = no->proxNo;
           }
+          lista->tamanho--;
         }
         anterior = no;
         no = no->proxNo;
