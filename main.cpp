@@ -167,11 +167,18 @@ void removeColetivo(Carro c, Lista* lista)
     }
   }
 
+//FILA de busca
+
+
+
+
+
+
 //Exibir elementos de uma lista
-void exibeLista(Lista* lista){
+void exibeLista(No* cabeca){
   No* no;
-  if(lista->cabeca!=NULL){
-    no = lista->cabeca;
+  if(cabeca!=NULL){
+    no = cabeca;
     system("clear||cls"); //Limpar a tela (Funciona tanto   em linux ou windows)
     while(no!=NULL){
       exibeCarro(no->carro);
@@ -229,8 +236,9 @@ int menu(){
         cout << "\t\t\t|  Incluir veículo ------------- 2  |"<<endl;
         cout << "\t\t\t|  Remover veículo COLETIVAMENTE 3  |"<<endl;
         cout << "\t\t\t|  Remover veículo ESPECÍFICO -- 4  |"<<endl;
-        cout << "\t\t\t|  Opção 5 --------------------- 5  |"<<endl;
-        cout << "\t\t\t|  Mostrar Relatório ----------- 6  |"<<endl;
+        cout << "\t\t\t|  BUSCA EM PILHA -------------- 5  |"<<endl;
+        cout << "\t\t\t|  BUSCA EM FILA --------------- 6  |"<<endl;
+        cout << "\t\t\t|  Mostrar Relatório ----------- 7  |"<<endl;
         cout << "\t\t\t|  Sair ------------------------ 0  |"<<endl;
         cout << "\t\t\t|___________________________________|\n\n"<<endl;
 
@@ -311,7 +319,7 @@ int main(){
       {
        case 1:
           system("clear||cls"); //Limpar a tela (Funciona tanto em linux ou windows
-          exibeLista(&mainLista);
+          exibeLista(mainLista.cabeca);
           relatorio=(relatorio+"Lista exibida | ");
        break;
     
@@ -356,8 +364,12 @@ int main(){
         case 5:
           
         break;
-  
+
         case 6:
+          
+        break;
+  
+        case 7:
             cout << relatorio;
         break;
         
