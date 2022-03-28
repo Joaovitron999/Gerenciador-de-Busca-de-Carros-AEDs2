@@ -172,7 +172,7 @@ void removeColetivo(Carro c, Lista* lista)
     }
   }
 
-//FILA de busca
+//Pilha de busca
 class Pilha
 {
 public:
@@ -194,6 +194,7 @@ public:
 
     if(cabeca==NULL){
       cabeca = novo_no;
+      cauda = novo_no; //23
     }
     else{
      // novo_no->proxNo = cabeca->proxNo;
@@ -201,12 +202,56 @@ public:
       novo_no->proxNo = cabeca;
       cabeca = novo_no;
     }
-    
-		
-		
-    tamanho++;
 	}
+  void remover(){
+    //desalocar memória
+    cabeca = cabeca->proxNo;
+  }
 };
+
+//Pilha de busca
+class Fila
+{
+public:
+	No* cabeca; // primeiro elemento
+	No* cauda; // último elemento
+  int tamanho = 0;//apenas para registrar qntdd de nós na lista
+
+  Fila()
+  {
+    // se não passar elemento, então cabeca e cauda são NULL
+    cabeca = NULL;
+    cauda = NULL;
+
+  }
+  void inserir(Carro c)
+	{
+		No* novo_no = new No();
+    novo_no->carro = c;
+
+    No* no;
+
+    if(cabeca==NULL){
+      cabeca = novo_no;
+      cauda = novo_no; //23
+    }
+    else{
+     // novo_no->proxNo = cabeca->proxNo;
+      no = cabeca;
+      while(no!=NULL){
+        if(no->proxNo == NULL){
+          cauda = novo_no;
+          novo_no->proxNo = NULL;
+          no->proxNo = novo_no;
+        }
+      }
+    }
+	}
+  //remove  
+
+};
+
+
 
 //buscar em pilha
 void buscaPilha(Carro c1,Carro c2,No* cabecaLista,Pilha* pilha){
@@ -219,11 +264,19 @@ void buscaPilha(Carro c1,Carro c2,No* cabecaLista,Pilha* pilha){
       no = no->proxNo;
   }
     while(no!=NULL);
-  
 }
 
-
-
+//buscar em fila
+void buscaFila(Carro c1,Carro c2,No* cabecaLista,Fila* fila){
+  No* no = cabecaLista;
+  do{
+      if(no->carro.comparacaoParcial(&c1) && no->carro.comparacaoParcial(&c2)){
+        fila->inserir(no->carro);
+      }
+      no = no->proxNo;
+  }
+    while(no!=NULL);
+}
 
 
 //Exibir elementos de uma lista
@@ -362,6 +415,7 @@ int main(){
   int resposta;
   Lista mainLista;
   Pilha pilha;
+  Fila fila;
 
   string relatorio = "\n\tRelatório:  ";
   
@@ -469,7 +523,48 @@ int main(){
           
         break;
 
-        case 6:
+        case 6:system("clear||cls"); //Limpar a tela (Funciona tanto em linux ou windows
+          cout << "\n\t\t\t Escreva a primeira opção do conjunto que deseja Buscar\n \n\tPor exemplo - Digite 'RENAULT' para buscar todos da mesma Marca. \n (Tipo/Ano/Modelo/Combustível/Câmbio/Direção/Cor/Portas/Km/Marca/Potência)\n \nConjunto:";
+          cin >> aux;
+          carroP1.modelo = aux;
+          carroP1.marca = aux;
+          carroP1.tipo = aux;
+          carroP1.ano = aux;
+          carroP1.km = aux;
+          carroP1.potencia = aux;
+          carroP1.combustivel = aux;
+          carroP1.cambio = aux;
+          carroP1.direcao = aux;
+          carroP1.cor = aux;
+          carroP1.portas = aux;
+          carroP1.placa = aux;    
+          
+
+          cout << "\n\t\t\t Adicionar mais um filtro á busca? \n\t\t\t(1)SIM,(2)Não\n \n\t";
+          cin >> aux;
+          if(aux=="1"){
+            cout << "\n\t\t\t Escreva a segunda opção do conjunto que deseja Buscar\n \n\tPor exemplo - Digite 'RENAULT' para buscar todos da mesma Marca. \n (Tipo/Ano/Modelo/Combustível/Câmbio/Direção/Cor/Portas/Km/Marca/Potência)\n \nConjunto:";
+            cin >> aux;
+            carroP2.modelo = aux;
+            carroP2.marca = aux;
+            carroP2.tipo = aux;
+            carroP2.ano = aux;
+            carroP2.km = aux;
+            carroP2.potencia = aux;
+            carroP2.combustivel = aux;
+            carroP2.cambio = aux;
+            carroP2.direcao = aux;
+            carroP2.cor = aux;
+            carroP2.portas = aux;
+            carroP2.placa = aux;    
+
+            
+            buscaFila(carroP1,carroP2,mainLista.cabeca,&fila);
+          }else{
+            buscaFila(carroP1,carroP1,mainLista.cabeca,&fila);            
+          }
+
+          exibeLista(fila.cabeca);
           
         break;
   
