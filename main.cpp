@@ -72,7 +72,7 @@ class No{
     Carro carro;
     No* proxNo;
 };
-//Estrurura da lista principal
+//Estrurura da lista principal 
 
 class Lista
 {
@@ -214,6 +214,7 @@ class Fila
 {
 public:
 	No* cabeca; // primeiro elemento
+  //cabeca = alloc();
 	No* cauda; // último elemento
   int tamanho = 0;//apenas para registrar qntdd de nós na lista
 
@@ -231,7 +232,7 @@ public:
 
     No* no;
 
-    if(cabeca==NULL){
+    if(cabeca==NULL && cauda==NULL){
       cabeca = novo_no;
       cauda = novo_no; //23
     }
@@ -239,11 +240,12 @@ public:
      // novo_no->proxNo = cabeca->proxNo;
       no = cabeca;
       while(no!=NULL){
-        if(no->proxNo == NULL){
+        if(no == cauda){
+          cauda->proxNo = novo_no;
           cauda = novo_no;
-          novo_no->proxNo = NULL;
-          no->proxNo = novo_no;
+          cout << "A" <<endl;
         }
+        no->proxNo = novo_no;
       }
     }
 	}
@@ -256,7 +258,6 @@ public:
 //buscar em pilha
 void buscaPilha(Carro c1,Carro c2,No* cabecaLista,Pilha* pilha){
   No* no = cabecaLista;
-  
   do{
       if(no->carro.comparacaoParcial(&c1) && no->carro.comparacaoParcial(&c2)){
         pilha->inserir(no->carro);
@@ -329,15 +330,13 @@ void lerParaLista(Lista *lista){
   arquivo.close();
 }
 
-
-
 //funçoes
 int menu(){
   int resposta;
   //system("clear||cls"); //Limpar a tela (Funciona tanto em linux ou windows
 
   //inclusão, exclusão, buscas e relatório;
-  cout << "\n\n\n\t\t\t _______________[Menu]______________ "<<endl;
+  cout << "\n\n\n\t\t\t ______________[Menu]_______________ "<<endl;
         cout << "\t\t\t|                                   |"<<endl;
         cout << "\t\t\t|  Exibir Lista de veículos ---- 1  |"<<endl;
         cout << "\t\t\t|  Incluir veículo ------------- 2  |"<<endl;
@@ -353,7 +352,7 @@ int menu(){
   cout << "\nEscolha uma opção"<<endl;
   
   cin >> resposta;
-  if(resposta<0||resposta>6){
+  if(resposta<0||resposta>7){
     return menu();
   }
   else
@@ -417,7 +416,7 @@ int main(){
   Pilha pilha;
   Fila fila;
 
-  string relatorio = "\n\tRelatório:  ";
+  string relatorio = "";
   
   lerParaLista(&mainLista);
   string aux;
@@ -523,7 +522,8 @@ int main(){
           
         break;
 
-        case 6:system("clear||cls"); //Limpar a tela (Funciona tanto em linux ou windows
+        case 6:
+          system("clear||cls"); //Limpar a tela (Funciona tanto em linux ou windows
           cout << "\n\t\t\t Escreva a primeira opção do conjunto que deseja Buscar\n \n\tPor exemplo - Digite 'RENAULT' para buscar todos da mesma Marca. \n (Tipo/Ano/Modelo/Combustível/Câmbio/Direção/Cor/Portas/Km/Marca/Potência)\n \nConjunto:";
           cin >> aux;
           carroP1.modelo = aux;
@@ -540,7 +540,7 @@ int main(){
           carroP1.placa = aux;    
           
 
-          cout << "\n\t\t\t Adicionar mais um filtro á busca? \n\t\t\t(1)SIM,(2)Não\n \n\t";
+          cout << "\n\t\t\t Adicionar mais um filtro á busca? \n\t\t\t(1)SIM, (2)Não\n \n\t";
           cin >> aux;
           if(aux=="1"){
             cout << "\n\t\t\t Escreva a segunda opção do conjunto que deseja Buscar\n \n\tPor exemplo - Digite 'RENAULT' para buscar todos da mesma Marca. \n (Tipo/Ano/Modelo/Combustível/Câmbio/Direção/Cor/Portas/Km/Marca/Potência)\n \nConjunto:";
@@ -569,8 +569,11 @@ int main(){
         break;
   
         case 7:
-            cout << relatorio;
+          system("clear||cls"); //Limpar a tela (Funciona tanto em linux ou windows
+          cout << "RELATÓRIO DO USUÁRIO:  | ";
+          cout <<  relatorio;
         break;
+       
         
       }
   }while(resposta!=0);
