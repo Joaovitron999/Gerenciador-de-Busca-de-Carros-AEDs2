@@ -95,22 +95,22 @@ int insere_inicio(cabecalho * ptlista, info * dados)
  * @param ptlista lista para inserir
  * @param dados dados do nó que vai ser inserido
  */
-int insere_fim(cabecalho * ptlista, info * dados)
+int insere_fim(Pilha* ptlista, Carro* c)
 {
-    no * tmp = new no;
+    no* novoNo = new No;
 
-    tmp->dados = dados;
+    novoNo->carro = c;
 
-    if (ptlista->tam == 0) {
-        tmp->prox = NULL;
-        ptlista->inicio = tmp;
-        ptlista->fim = tmp;
+    if (ptlista->tamanho == 0) {
+        novoNo->proxNo = NULL;
+        ptlista->cabeca = novoNo;
+        ptlista->cauda = novoNo;
     } else {
-        tmp->prox = NULL;
-        (ptlista->fim)->prox = tmp;
-        ptlista->fim = tmp;
+        novoNo->proxNo = NULL;
+        (ptlista->cauda)->proxNo = novoNo;
+        ptlista->cauda = novoNo;
     }
-    ptlista->tam++;
+    ptlista->tamanho++;
 }
 /**
  * @brief insere um nó em uma lista ordenada, utiliza a insere no inicio/fim para evitar que em todos os casos tenha que andar por todos os elementos da lista

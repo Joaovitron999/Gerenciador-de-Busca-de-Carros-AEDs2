@@ -8,6 +8,7 @@
 #include "biblioteca.h"
 #include <iostream>
 #include <fstream>
+#include <stdlib.h>
 
 using std::cout; using std::cerr;
 using std::endl; using std::string;
@@ -50,7 +51,8 @@ struct Carro{
 
 //funcao q exibe carro
 void exibeCarro(Carro c1){
-  cout <<"\n\t-----------------------------------------------------------------------------------------------------------\n";
+  if(c1.placa !=""){
+    cout <<"\n\t-----------------------------------------------------------------------------------------------------------\n";
   cout <<"\tModelo: ["<< c1.modelo <<"] | ";
   cout <<"Marca: [" << c1.marca <<"] | ";
   cout <<"Tipo: [" << c1.tipo <<"] | ";
@@ -64,21 +66,22 @@ void exibeCarro(Carro c1){
   cout <<"Portas: [" << c1.portas <<"] | ";
   cout <<"Placa: [" << c1.placa <<"] | ";
   cout <<"\n\t-----------------------------------------------------------------------------------------------------------\n";
+    }
 }
 
 //Estrutura dos nós da lista principal
 class No{
   public:
     Carro carro;
-    No* proxNo;
+    No* proxNo = (No*) malloc(sizeof(No));
 };
 //Estrurura da lista principal 
 
 class Lista
 {
 public:
-	No* cabeca; // primeiro elemento
-	No* cauda; // último elemento
+	No* cabeca = (No*) malloc(sizeof(No)); // primeiro elemento
+	No* cauda = (No*) malloc(sizeof(No)); // último elemento
   int tamanho = 0;//apenas para registrar qntdd de nós na lista
 
   Lista()
@@ -91,7 +94,8 @@ public:
 
   void inserir(Carro c)
 	{
-		No* novo_no = new No();
+		No* novo_no = (No*) malloc(sizeof(No)); 
+    novo_no = new No();
     novo_no->carro = c;
 
 		if(cabeca==NULL)
@@ -124,8 +128,8 @@ public:
 
 void removeEspecifico(Carro c, Lista* lista)
 	{
-    No* no;
-    No* anterior;
+    No* no = (No*) malloc(sizeof(No));
+    No* anterior = (No*) malloc(sizeof(No));
     
     if(lista->cabeca!=NULL){
     no = lista->cabeca;
@@ -135,8 +139,10 @@ void removeEspecifico(Carro c, Lista* lista)
         if(no->carro.comparacaoTotal(&c)){
           if (no==lista->cabeca){
             lista->cabeca = no->proxNo;
+            free(no);
           }else{
             anterior->proxNo = no->proxNo;
+            free(no);
           }
           lista->tamanho--;
         }
@@ -148,8 +154,8 @@ void removeEspecifico(Carro c, Lista* lista)
 
 void removeColetivo(Carro c, Lista* lista)
 	{
-    No* no;
-    No* anterior;
+    No* no = (No*) malloc(sizeof(No));
+    No* anterior = (No*) malloc(sizeof(No));
     
 
     
@@ -161,8 +167,10 @@ void removeColetivo(Carro c, Lista* lista)
         if(no->carro.comparacaoParcial(&c)){
           if (no==lista->cabeca){
             lista->cabeca = no->proxNo;
+            free(no);
           }else{
             anterior->proxNo = no->proxNo;
+            free(no);
           }
           lista->tamanho--;
         }
@@ -176,8 +184,8 @@ void removeColetivo(Carro c, Lista* lista)
 class Pilha
 {
 public:
-	No* cabeca; // primeiro elemento
-	No* cauda; // último elemento
+	No* cabeca = (No*) malloc(sizeof(No)); // primeiro elemento
+	No* cauda = (No*) malloc(sizeof(No)); // último elemento
   int tamanho = 0;//apenas para registrar qntdd de nós na lista
 
   Pilha()
@@ -189,7 +197,8 @@ public:
   }
   void inserir(Carro c)
 	{
-		No* novo_no = new No();
+		No* novo_no = (No*) malloc(sizeof(No));
+    novo_no = new No();
     novo_no->carro = c;
 
     if(cabeca==NULL){
@@ -214,36 +223,35 @@ class Fila
 {
 public:
 	No* cabeca; // primeiro elemento
-  //cabeca = alloc();
 	No* cauda; // último elemento
-  int tamanho = 0;//apenas para registrar qntdd de nós na lista
+  int tamanho = 0; //apenas para registrar qntdd de nós na lista
 
   Fila()
   {
     // se não passar elemento, então cabeca e cauda são NULL
     cabeca = NULL;
     cauda = NULL;
-
   }
   void inserir(Carro c)
 	{
-		No* novo_no = new No();
+		No* novo_no = (No*) malloc(sizeof(No));
+    novo_no = new No();
     novo_no->carro = c;
 
     No* no;
 
     if(cabeca==NULL && cauda==NULL){
-      cabeca = novo_no;
-      cauda = novo_no; //23
+      cabeca->proxNo = novo_no;
+      cauda = novo_no;
+      novo_no->proxNo=NULL;
     }
     else{
      // novo_no->proxNo = cabeca->proxNo;
       no = cabeca;
-      while(no!=NULL){
+      while(no!=cauda){
         if(no == cauda){
           cauda->proxNo = novo_no;
-          cauda = novo_no;
-          cout << "A" <<endl;
+          cauda = cauda->proxNo;
         }
         no->proxNo = novo_no;
       }
@@ -273,6 +281,7 @@ void buscaFila(Carro c1,Carro c2,No* cabecaLista,Fila* fila){
   do{
       if(no->carro.comparacaoParcial(&c1) && no->carro.comparacaoParcial(&c2)){
         fila->inserir(no->carro);
+        no=NULL;
       }
       no = no->proxNo;
   }
